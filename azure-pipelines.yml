@@ -1,15 +1,11 @@
-trigger:
-  - main  # your default branch
-
-pool:
-  vmImage: 'windows-latest'
-
 steps:
-- task: Gradle@2
+- task: Maven@4
   inputs:
-    gradleWrapperFile: 'gradlew.bat'  # On Windows use gradlew.bat
-    tasks: 'clean test'
-    publishJUnitResults: true
-    testResultsFiles: '**/build/test-results/test/TEST-*.xml'
+    mavenPomFile: 'pom.xml'
+    mavenOptions: '-Xmx3072m'
     javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.11'
+    jdkVersionOption: 'default'
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: true
+    testResultsFiles: '**/TEST-*.xml'
+    goals: 'package'
