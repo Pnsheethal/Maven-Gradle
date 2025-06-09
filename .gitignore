@@ -1,0 +1,15 @@
+# Maven
+target/
+*.log
+
+# Java
+*.class
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+
+# Gradle (if used)
+.gradle/
+build/
