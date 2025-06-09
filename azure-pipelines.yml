@@ -5,6 +5,9 @@ pool:
   vmImage: 'windows-latest'
 
 steps:
+- script: chmod +x gradlew
+  displayName: 'Make gradlew executable (Linux/macOS only)'
+
 - task: Gradle@3
   inputs:
     gradleWrapperFile: 'gradlew'
