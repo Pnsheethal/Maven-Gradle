@@ -5,9 +5,9 @@ pool:
   vmImage: 'windows-latest'
 
 steps:
-- task: Maven@3
+- task: Gradle@3
   inputs:
-    mavenPomFile: 'pom.xml'
-    goals: 'clean test'
+    gradleWrapperFile: 'gradlew'
+    tasks: 'clean test'
     publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    testResultsFiles: '**/build/test-results/test/TEST-*.xml'
