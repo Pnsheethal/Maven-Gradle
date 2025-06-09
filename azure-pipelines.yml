@@ -1,16 +1,17 @@
 trigger:
-- main
+  - main  # or your default branch
 
 pool:
   vmImage: 'windows-latest'
 
 steps:
-- script: chmod +x gradlew
-  displayName: 'Make gradlew executable (Linux/macOS only)'
-
-- task: Gradle@3
+- task: Maven@3
   inputs:
-    gradleWrapperFile: 'gradlew'
-    tasks: 'clean test'
+    mavenPomFile: 'pom.xml'
+    goals: 'clean test'
+    options: '-B'  # batch mode for logs
     publishJUnitResults: true
-    testResultsFiles: '**/build/test-results/test/TEST-*.xml'
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.11'  # Choose your JDK version
+    mavenVersionOption: 'Default'
