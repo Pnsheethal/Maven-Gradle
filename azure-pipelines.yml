@@ -1,17 +1,15 @@
 trigger:
-  - main  # or your default branch
+  - main  # your default branch
 
 pool:
   vmImage: 'windows-latest'
 
 steps:
-- task: Maven@3
+- task: Gradle@2
   inputs:
-    mavenPomFile: 'pom.xml'
-    goals: 'clean test'
-    options: '-B'  # batch mode for logs
+    gradleWrapperFile: 'gradlew.bat'  # On Windows use gradlew.bat
+    tasks: 'clean test'
     publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    testResultsFiles: '**/build/test-results/test/TEST-*.xml'
     javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.11'  # Choose your JDK version
-    mavenVersionOption: 'Default'
+    jdkVersionOption: '1.11'
